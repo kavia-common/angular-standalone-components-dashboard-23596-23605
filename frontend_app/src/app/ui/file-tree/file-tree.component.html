@@ -1,0 +1,45 @@
+<div class="tree" role="tree">
+  <ng-container *ngIf="expandedIds$ | async as expandedIds">
+    <ng-container *ngIf="selectedId$ | async as selectedId">
+      <div *ngFor="let node of nodes; trackBy: trackById" class="node">
+        <button
+          type="button"
+          class="row"
+          role="treeitem"
+          [attr.aria-expanded]="node.type === 'folder' ? isExpanded(expandedIds, node) : null"
+          [ngClass]="{ selected: selectedId === node.id, folder: node.type === 'folder' }"
+          [ngStyle]="{ paddingLeft: indentPx() + 'px' }"
+          (click)="select(node)"
+        >
+          <!-- caret (folders only) -->
+          <span class="caret" *ngIf="node.type === 'folder'" (click)="$event.stopPropagation(); toggle(node)">
+            <span class="caret-icon" [ngStyle]="{ transform: caretRotation(isExpanded(expandedIds, node)) }">▶</span>
+          </span>
+
+          <!-- placeholder to keep alignment for files (no caret) -->
+          <span class="caret-spacer" *ngIf="node.type === 'file'"></span>
+
+          <!-- icon -->
+          <span class="icon" aria-hidden="true">
+            <span class="icon-box" [ngClass]="node.type">
+              {{ node.type === 'folder' ? '📁' : '📄' }}
+            </span>
+          </span>
+
+          <!-- label -->
+          <span class="label">{{ node.label }}</span>
+
+          <span class="spacer"></span>
+
+          <!-- status dot (right aligned) -->
+          <span class="status" *ngIf="node.hasStatusDot" aria-hidden="true"></span>
+        </button>
+
+        <!-- children -->
+        <div class="children" role="group" *ngIf="node.type === 'folder' && isExpanded(expandedIds, node)">
+          <app-file-tree [nodes]="node.children || []" [depth]="depth + 1"></app-file-tree>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

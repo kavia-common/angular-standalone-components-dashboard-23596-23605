@@ -1,0 +1,34 @@
+<div class="frame">
+  <aside class="sidebar" aria-label="Project file tree">
+    <app-file-tree [nodes]="tree"></app-file-tree>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="brand">
+        <span class="dot"></span>
+        <span class="title">Ocean Professional</span>
+      </div>
+
+      <nav class="nav">
+        <a routerLink="/" class="link">IDE</a>
+        <a routerLink="/components" class="link">Components</a>
+      </nav>
+    </header>
+
+    <section class="content">
+      <router-outlet></router-outlet>
+
+      <!-- Default editor placeholder (when no nested route) -->
+      <div class="editor-placeholder">
+        <div class="card">
+          <h2>Editor Area</h2>
+          <p>
+            This is a placeholder for the main workspace/editor panel. The left sidebar reproduces the screenshot’s file-tree
+            UI.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

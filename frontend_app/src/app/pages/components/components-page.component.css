@@ -1,0 +1,14 @@
+.wrap {
+  width: min(920px, 100%);
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.count {
+  color: rgba(229, 231, 235, 0.85);
+}
