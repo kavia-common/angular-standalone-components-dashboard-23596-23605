@@ -1,0 +1,4 @@
+{
+    "command": "npm run test",
+    "working_directory": "/home/kavia/workspace/code-generation/angular-standalone-components-dashboard-23596-23605/frontend_app"
+}
